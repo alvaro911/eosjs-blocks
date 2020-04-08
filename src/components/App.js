@@ -28,16 +28,15 @@ function App() {
       blockNums.map(async (blockNum, i) => {
         try {
           const block = await rpc.get_block(blockNum)
-          setBlocks(blocks => [...blocks, block])
+          setBlocks((blocks) => [...blocks, block])
         } catch (error) {
-          console.log('the index that dies is ', i)
           errorCount++
           if (errorCount > 3) {
             setErrorBlock(true)
           }
           setTimeout(async () => {
             const block = await rpc.get_block(blockNum)
-            setBlocks(savedBlocks => [...savedBlocks, block])
+            setBlocks((savedBlocks) => [...savedBlocks, block])
           }, 1000)
         }
       })
@@ -53,7 +52,6 @@ function App() {
   }, [])
 
   function reloadBlocks() {
-    setLoading(false)
     setErrorBlock(false)
     setErrorInfo(false)
     setBlocks([])
@@ -87,6 +85,7 @@ function App() {
   }
 
   if (errorInfo) {
+    return <ErrorBlock reloadBlocks={reloadBlocks} />
   }
 
   if (loading) {
