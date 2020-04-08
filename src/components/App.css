@@ -1,0 +1,19 @@
+header {
+  width: 100%;
+  padding: 20px;
+}
+
+button {
+  background-color: #0063ac;
+  border: 0;
+  width: 85px;
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  border-radius: 15px;
+}
+
+section {
+  width: 100%;
+  padding: 20px;
+}
