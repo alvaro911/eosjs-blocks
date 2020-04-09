@@ -15,13 +15,15 @@ function ErrorBlock({ reloadBlocks }) {
         padding: 10,
         height: 'auto',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
+      data-testid='error block'
     >
-      <p style={{ marginRight: 15 }}>
+      <p style={{ marginRight: 15 }} data-testid='error message'>
         There was a problem getting the blocks, Please try again
       </p>
       <button
+        data-testid='error button'
         style={{ backgroundColor: 'red', width: 85, height: 40 }}
         onClick={reload}
       >
@@ -32,7 +34,7 @@ function ErrorBlock({ reloadBlocks }) {
 }
 
 ErrorBlock.propTypes = {
-  reloadBlocks: PropTypes.func
+  reloadBlocks: PropTypes.func,
 }
 
 export default ErrorBlock

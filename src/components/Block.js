@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import JSONPretty from 'react-json-pretty'
-import 'react-json-pretty/themes/monikai.css'
-
-import { format } from 'date-fns'
-import { parseISO } from 'date-fns/esm'
+import moment from 'moment'
+import 'react-json-pretty/themes/1337.css'
 
 function Block({ id, timestamp, actionCount, raw, index }) {
   const [showRaw, setShowRaw] = useState(false)
@@ -14,16 +12,22 @@ function Block({ id, timestamp, actionCount, raw, index }) {
   }
 
   return (
-    <div style={{ padding: 15, cursor: 'pointer' }} onClick={toggleShowRaw}>
+    <div
+      style={{ padding: 15, cursor: 'pointer' }}
+      data-testid='info container'
+      onClick={toggleShowRaw}
+    >
       {!showRaw ? (
-        <div>
+        <div data-testid='basic block info'>
           <h2>{index}</h2>
           <h3>{id}</h3>
-          <h3>{format(parseISO(timestamp), 'MM/dd/yyyy HH:mm:ss')}</h3>
+          <h3>{moment(timestamp).format('MMMM Do YYYY, h:mm:ss a')}</h3>
           <h3>Action Count: {actionCount}</h3>
         </div>
       ) : (
-        <JSONPretty id='json-pretty' data={raw}></JSONPretty>
+        <div data-testid='pretty json data'>
+          <JSONPretty id='json-pretty' data={raw}></JSONPretty>
+        </div>
       )}
     </div>
   )
@@ -33,8 +37,8 @@ Block.propTypes = {
   id: PropTypes.string.isRequired,
   timestamp: PropTypes.string.isRequired,
   actionCount: PropTypes.number.isRequired,
-  raw: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired
+  raw: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 }
 
 export default Block

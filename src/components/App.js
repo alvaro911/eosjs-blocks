@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { JsonRpc } from 'eosjs'
 
 import './App.css'
 import Block from './Block'
 import ErrorBlock from './ErrorBlock'
-
-const rpc = new JsonRpc('https://eos.greymass.com')
+import { rpc } from '../utils/rpc'
 
 function App() {
   const [blocks, setBlocks] = useState([])
@@ -89,15 +87,19 @@ function App() {
   }
 
   if (loading) {
-    return <p>Loading</p>
+    return <p data-testid='loading state'>Loading</p>
   }
 
   return (
-    <div className='App'>
+    <div
+      className='App'
+      test-id='application wrapper'
+      data-testid='blocks container'
+    >
       <header>
         <button onClick={reloadBlocks}>Load</button>
       </header>
-      <section>{renderBlocks(blocks)}</section>
+      <section data-testid='blocks'>{renderBlocks(blocks)}</section>
     </div>
   )
 }
